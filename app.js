@@ -49,11 +49,6 @@ const report = (crawler) => {
     }
   }
 
-  const allDelays = nodes.filter(item => item.latency).map(item => item.latency)
-  const averageDelay = (allDelays.reduce((a, b) => a + b, 0) / allDelays.length).toFixed(2)
-  const maxDelay = Math.max(...allDelays)
-  const minDelay = Math.min(...allDelays)
-
   // Node stats;
   console.log('Individual node stats');
   for (const node of orderBy(Object.values(nodeStats),['ip'],['desc'])) {
@@ -88,14 +83,7 @@ const report = (crawler) => {
   for (const stat of orderBy(Object.values(versionStats), ['version'], ['desc'])) {
     console.log(`  - ${stat.version} on ${stat.count} nodes`)
   }
-
-  // delay stats
-  console.log('')
-  console.log('Delay')
-  console.log(`  Avg: ${averageDelay}ms`)
-  console.log(`  Min: ${minDelay}ms`)
-  console.log(`  Max: ${maxDelay}ms`)
-
+  
   console.log('------------------------------------------')
   console.log(`Finished scanning in ${new Date() - crawler.startTime}ms`)
 
