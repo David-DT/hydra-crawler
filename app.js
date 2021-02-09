@@ -28,12 +28,12 @@ const report = (crawler) => {
       blockStats[node.height].ids[node.id] = 1
     }
 
-    if (versionStats[node.version]) {
-      versionStats[node.version].count += 1
+    if (versionStats[node.config.version]) {
+      versionStats[node.config.version].count += 1
     } else {
-      versionStats[node.version] = {
+      versionStats[node.config.version] = {
         count: 1,
-        version: node.version
+        version: node.config.version
       }
     }
 
@@ -83,7 +83,7 @@ const report = (crawler) => {
   for (const stat of orderBy(Object.values(versionStats), ['version'], ['desc'])) {
     console.log(`  - ${stat.version} on ${stat.count} nodes`)
   }
-  
+
   console.log('------------------------------------------')
   console.log(`Finished scanning in ${new Date() - crawler.startTime}ms`)
 
