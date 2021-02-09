@@ -43,7 +43,7 @@ const report = (crawler) => {
       nodeStats[node.ip] = { 
         ip: node.ip,
         location: node.location,
-        version: node.version,
+        version: node.config.version,
         height: node.height
       }
     }
